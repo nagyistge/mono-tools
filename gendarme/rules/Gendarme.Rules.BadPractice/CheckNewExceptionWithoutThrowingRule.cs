@@ -66,7 +66,7 @@ namespace Gendarme.Rules.BadPractice {
 	/// 	}
 	/// 	DoWork (arg);
 	/// }
-	/// 
+	///
 	/// Exception CreateException ()
 	/// {
 	///	return new Exception ();
@@ -74,7 +74,7 @@ namespace Gendarme.Rules.BadPractice {
 	/// </code>
 	/// </example>
 
-	[Problem ("This method creates an exception that is never throwed nor returned to the caller.")]
+	[Problem ("This method creates an exception that is never thrown nor returned to the caller.")]
 	[Solution ("Make sure the exception is required, throw it (if it is) or remove it (if not).")]
 	[EngineDependency (typeof (OpCodeEngine))]
 	public class CheckNewExceptionWithoutThrowingRule : Rule, IMethodRule {
