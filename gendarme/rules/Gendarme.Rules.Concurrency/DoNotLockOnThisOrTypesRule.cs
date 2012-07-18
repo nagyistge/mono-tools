@@ -130,7 +130,7 @@ namespace Gendarme.Rules.Concurrency {
 					// ldtoken
 					msg = String.Format (CultureInfo.InvariantCulture, LockType, (ins.Previous.Operand as TypeReference).Name);
 				} else {
-					msg = mr.ToString ();
+					msg = Gendarme.Framework.Helpers.MethodPrinter.FormatMethod(mr);
 				}
 				break;
 			default:

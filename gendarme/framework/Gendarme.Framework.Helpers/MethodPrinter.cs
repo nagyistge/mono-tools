@@ -24,6 +24,44 @@ namespace Gendarme.Framework.Helpers {
 
 	public sealed class MethodPrinter { 
 
+        public static string FormatMethod(MethodReference md) {
+            var builder = new StringBuilder();
+            if (md.DeclaringType != null) {
+                builder.Append(md.DeclaringType.FullName);
+                builder.Append(".");
+            }
+            if (md.Name == ".cctor")
+                builder.Append("<class constructor>");
+            if (md.Name == ".ctor")
+                builder.Append("<constructor>");
+            else 
+                builder.Append(md.Name);
+            if (md.HasParameters)
+            {
+                builder.Append("(");
+
+                for (int i = 0; i < md.Parameters.Count; i++)
+                {
+                    var parameter = md.Parameters[i];
+                    if (i > 0)
+                        builder.Append(",");
+
+                    if (parameter.ParameterType.IsSentinel)
+                        builder.Append("...,");
+
+                    builder.Append(parameter.ParameterType.FullName);
+                }
+               
+                builder.Append(")");
+            }
+            if (md.ReturnType != null && md.ReturnType.FullName != "System.Void") {
+                builder.Append(": ");
+                builder.Append(md.ReturnType.FullName);
+            }
+
+            return builder.ToString();
+        }
+
 		private IList<Instruction> instructions;
 		private MethodDefinition method;
 		private IDictionary branchTable;

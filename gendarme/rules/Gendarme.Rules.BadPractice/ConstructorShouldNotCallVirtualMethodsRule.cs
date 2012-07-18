@@ -197,7 +197,7 @@ namespace Gendarme.Rules.BadPractice {
 			if (!OpCodeBitmask.Calls.Intersect (OpCodeEngine.GetBitmask (method)))
 				return;
 
-			string method_name = method.GetFullName ();
+			string method_name = MethodPrinter.FormatMethod(method);
 			// check to avoid constructors calling recursive methods
 			if (stack.Contains (method_name))
 				return;
@@ -224,7 +224,7 @@ namespace Gendarme.Rules.BadPractice {
 					if (md.IsVirtual && !md.IsFinal) {
 						string s = stack.Count == 0 ? method_name : stack.Aggregate ((a1, a2) => a1 + ", " + Environment.NewLine + a2);
 						s = String.Format (CultureInfo.InvariantCulture,
-							"Calling a virtual method, '{0}' from {1}.", md, s);
+							"Calling a virtual method, '{0}' from {1}.", MethodPrinter.FormatMethod(md), s);
 						Runner.Report (method, current, Severity.High, Confidence.High, s);
 					} else {
 						stack.Push (method_name);

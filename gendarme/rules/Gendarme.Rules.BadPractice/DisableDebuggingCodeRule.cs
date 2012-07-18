@@ -161,7 +161,7 @@ namespace Gendarme.Rules.BadPractice {
 
 				// ... Write* methods
 				if (mr.Name.StartsWith ("Write", StringComparison.Ordinal))
-					Runner.Report (method, ins, Severity.Low, Confidence.Normal, mr.ToString ());
+					Runner.Report (method, ins, Severity.Low, Confidence.Normal, MethodPrinter.FormatMethod(mr));
 				// Confidence==Normal because we can't be sure if there's some logic to avoid displaying
 				// on the console under normal (non debugging) circumstances
 			}

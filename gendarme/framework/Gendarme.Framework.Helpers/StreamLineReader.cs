@@ -81,6 +81,8 @@ namespace Gendarme.Framework.Helpers {
 				if (n == max) {
 					max = sr.ReadBlock (buff, 0, buff.Length);
 					n = 0;
+                    if (max == 0)
+                        return len;
 				}
 				char c = buff [n++];
 				switch (c) {

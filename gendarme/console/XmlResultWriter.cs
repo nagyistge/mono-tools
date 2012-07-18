@@ -181,6 +181,21 @@ namespace Gendarme {
 			writer.WriteAttributeString ("Confidence", defect.Confidence.ToString ());
 			writer.WriteAttributeString ("Location", defect.Location.ToString ());
 			writer.WriteAttributeString ("Source", defect.Source);
+            
+            String st =null;
+            if (defect.Location is MethodDefinition)
+                st = "Method";
+            else if (defect.Location is FieldDefinition)
+                st = "Field";
+            else if (defect.Location is ParameterDefinition)
+                st = "Parameter";
+            else if (defect.Location is TypeDefinition)
+                st = "Type";
+            else if (defect.Location is MethodReturnType)
+                st = "Result";
+            if (st != null)
+                writer.WriteAttributeString ("SourceType", st);
+
 			writer.WriteString (defect.Text);
 			writer.WriteEndElement ();
 		}

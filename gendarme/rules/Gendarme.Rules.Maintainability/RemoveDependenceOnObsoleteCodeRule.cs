@@ -291,7 +291,7 @@ namespace Gendarme.Rules.Maintainability {
 
 			string msg = null;
 			if (IsObsolete (call)) {
-				msg = String.Format (CultureInfo.InvariantCulture, "Method '{0}' is obsolete.", call);
+				msg = String.Format (CultureInfo.InvariantCulture, "Method '{0}' is obsolete.", Gendarme.Framework.Helpers.MethodPrinter.FormatMethod(call));
 			} else {
 				TypeReference type = call.DeclaringType;
 				if (IsObsolete (type))

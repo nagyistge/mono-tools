@@ -224,7 +224,7 @@ namespace Gendarme.Rules.Correctness {
 			}
 
 			if (!found) {
-				string s = String.Format (CultureInfo.InvariantCulture, "{0} should call base.Dispose().", method.GetFullName ());
+				string s = String.Format (CultureInfo.InvariantCulture, "{0} should call base.Dispose().", MethodPrinter.FormatMethod(method));
 				Runner.Report (method, Severity.Medium, Confidence.High, s);
 			}
 		}

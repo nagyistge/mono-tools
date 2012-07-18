@@ -145,7 +145,7 @@ namespace Gendarme.Rules.Performance {
 					// check for some common exceptions (to reduce false positive)
 					if (!IsCallException (callee)) {
 						string s = String.Format (CultureInfo.InvariantCulture,
-							"Do not ignore method results from call to '{0}'.", callee.GetFullName ());
+							"Do not ignore method results from call to '{0}'.", MethodPrinter.FormatMethod(callee));
 						Runner.Report (method, instruction, Severity.Medium, Confidence.Normal, s);
 					}
 				}

@@ -169,7 +169,7 @@ namespace Gendarme.Rules.BadPractice {
 				if (severity.HasValue) {
 					string msg = String.Format (CultureInfo.InvariantCulture,
 						"You are calling to {0}, which is a potentially problematic method", 
-						instruction.Operand);
+						MethodPrinter.FormatMethod((MethodReference)instruction.Operand));
 					Runner.Report (method, instruction, severity.Value, Confidence.High, msg);
 				}
 			}	

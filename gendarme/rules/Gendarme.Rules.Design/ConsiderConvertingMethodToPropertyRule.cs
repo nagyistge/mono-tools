@@ -92,7 +92,7 @@ namespace Gendarme.Rules.Design {
 			string name = "Set" + getter.Name.Substring (3);
 			parameter [0] = getter.ReturnType.GetFullName ();
 			MethodDefinition setter = getter.DeclaringType.GetMethod (name, Void, parameter);
-			return setter == null ? String.Empty : setter.GetFullName ();
+			return setter == null ? String.Empty : Gendarme.Framework.Helpers.MethodPrinter.FormatMethod(setter);
 		}
 
 		public RuleResult CheckMethod (MethodDefinition method)

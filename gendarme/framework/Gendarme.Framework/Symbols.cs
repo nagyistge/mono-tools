@@ -97,7 +97,7 @@ namespace Gendarme.Framework {
 
 		private static string FormatSequencePoint (SequencePoint sp, bool exact)
 		{
-			return FormatSequencePoint (sp.Document.Url, sp.StartLine, sp.StartColumn, exact);
+			return FormatSequencePoint (sp.Document.Url, sp.StartLine, sp.StartColumn, sp.EndLine, sp.EndColumn, exact);
 		}
 		
 		// It would probably be a good idea to move this formatting into
@@ -110,14 +110,14 @@ namespace Gendarme.Framework {
 		// on the Mac have direct support for paths like foo/bar.cs:10 
 		// which include line numbers and foo/bar.cs:10:5 for paths which
 		// include line and column.
-		private static string FormatSequencePoint (string document, int line, int column, bool exact)
+		private static string FormatSequencePoint (string document, int line, int column, int endline, int endcol, bool exact)
 		{
 			string sline = (line == PdbHiddenLine) ? "unavailable" : line.ToString (CultureInfo.InvariantCulture);
 
 			// MDB (mono symbols) does not provide any column information (so we don't show any)
 			// there's also no point in showing a column number if we're not totally sure about the line
 			if (exact && (column > 0))
-				return String.Format (CultureInfo.InvariantCulture, "{0}({1},{2})", document, sline, column);
+				return String.Format (CultureInfo.InvariantCulture, "{0}({1},{2}-{3},{4})", document, sline, column, endline, endcol);
 
 			return String.Format (CultureInfo.InvariantCulture, "{0}({2}{1})", document, sline,
 				exact ? String.Empty : AlmostEqualTo);
@@ -133,7 +133,7 @@ namespace Gendarme.Framework {
 				if (search.SequencePoint != null) {
 					// skip entries that are hidden (0xFEEFEE)
 					if (search.SequencePoint.StartLine != PdbHiddenLine)
-						return FormatSequencePoint (search.SequencePoint, feefee);
+						return FormatSequencePoint (search.SequencePoint, !feefee);
 					// but from here on we're not 100% sure about line numbers
 					feefee = true;
 				}
@@ -151,7 +151,7 @@ namespace Gendarme.Framework {
 			// unless we have the special 0xFEEFEE value (used in PDB for hidden source code)
 			if (line != PdbHiddenLine)
 				line--;
-			return FormatSequencePoint (candidate.SequencePoint.Document.Url, line, 0, false);
+			return FormatSequencePoint (candidate.SequencePoint.Document.Url, line, 0, 0, 0, false);
 		}
 
 		static public string GetSource (Defect defect)

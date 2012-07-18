@@ -224,7 +224,7 @@ namespace Gendarme.Rules.Performance {
 				if (md.IsVirtual && !md.IsFinal) {
 					// virtual calls are expensive, so the code better cache the value
 					string msg = String.Format (CultureInfo.InvariantCulture, 
-						"Multiple ({0}) calls to virtual property '{1}'.", count, md.ToString ());
+						"Multiple ({0}) calls to virtual property '{1}'.", count, MethodPrinter.FormatMethod(md));
 					Runner.Report (method, GetSeverity (count, true), Confidence.Normal, msg);
 				} else if (!IsInliningCandidate (md)) {
 					// non-virtual calls might be inlined
@@ -232,7 +232,7 @@ namespace Gendarme.Rules.Performance {
 					int size = md.HasBody ? md.Body.CodeSize : 0;
 					string msg = String.Format (CultureInfo.InvariantCulture,
 						"Multiple ({0}) calls to non-virtual property '{1}', likely non-inlined due to size ({2} >= {3}).",
-						count, md.ToString (), size, InlineLimit);
+						count, MethodPrinter.FormatMethod(md), size, InlineLimit);
 					Runner.Report (method, GetSeverity (count, false), Confidence.Normal, msg);
 				}
 			}
