@@ -128,7 +128,7 @@
 2008-11-01  Sebastien Pouliot  <sebastien@ximian.com>
 
 	* DoNotCastIntPtrToInt32Rule.cs: Now cover the case where Marshal.
-	ReadInt[32|64] is used to read pointers (i.e. casted into IntPtr). 
+	ReadInt[32|64] is used to read pointers (i.e. cast into IntPtr). 
 	Renamed rule to (more general) DoNotAssumeIntPtrSizeRule
 
 2008-10-30  Jesse Jones  <jesjones@mindspring.com>

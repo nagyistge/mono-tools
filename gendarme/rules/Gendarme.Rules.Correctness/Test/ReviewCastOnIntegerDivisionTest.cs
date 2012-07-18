@@ -51,7 +51,7 @@ namespace Test.Rules.Correctness {
 		public double DoubleBadIntDivParameters (int a, int b)
 		{
 			// this compiles into: ldarg.1 ldarg2 div conv.r8
-			// so the division is made on integers, then the result is casted into a double
+			// so the division is made on integers, then the result is cast into a double
 			return a / b;
 		}
 

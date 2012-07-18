@@ -51,7 +51,7 @@ namespace Gendarme.Rules.Correctness {
 	/// <code>
 	/// public double Bad (int a, int b)
 	/// {
-	///	// integers are divided, then the result is casted into a double
+	///	// integers are divided, then the result is cast into a double
 	///	// i.e. Bad (5, 2) == 2.0d
 	///	return a / b;
 	/// }

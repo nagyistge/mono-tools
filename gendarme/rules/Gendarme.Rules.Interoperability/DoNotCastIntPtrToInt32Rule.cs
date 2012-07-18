@@ -167,7 +167,7 @@ namespace Gendarme.Rules.Interoperability {
 					return;
 
 				string msg = String.Format (CultureInfo.InvariantCulture,
-					"A '{0}' value is casted into an '{1}' when reading marshalled memory.",
+					"A '{0}' value is cast into an '{1}' when reading marshalled memory.",
 					mr.ReturnType.GetFullName (), m.Parameters [0].ParameterType.GetFullName ());
 				Runner.Report (method, ins, Severity.High, Confidence.Normal, msg);
 			}
