@@ -38,8 +38,8 @@ using Gendarme.Framework.Rocks;
 namespace Gendarme.Rules.Smells {
 
 	/// <summary>
-	/// This rule allows developers to measure the classes size. When a 
-	/// class is trying to doing a lot of work, then you probabily have 
+	/// This rule allows developers to measure the classes size. When a
+	/// class is trying to doing a lot of work, then you probabily have
 	/// the Large Class smell.
 	///
 	/// This rule will fire if a type contains too many fields (over 25 by default) or
@@ -53,7 +53,7 @@ namespace Gendarme.Rules.Smells {
 	///	int x, x1, x2, x3;
 	///	string s, s1, s2, s3;
 	///	DateTime bar, bar1, bar2;
-	///	string[] strings, strings1; 
+	///	string[] strings, strings1;
 	/// }
 	/// </code>
 	/// </example>
@@ -63,7 +63,7 @@ namespace Gendarme.Rules.Smells {
 	/// public class MyClass {
 	/// 	int x;
 	/// 	string s;
-	/// 	DateTime bar; 
+	/// 	DateTime bar;
 	/// }
 	/// </code>
 	/// </example>
@@ -169,7 +169,7 @@ namespace Gendarme.Rules.Smells {
 				int count = CountPrefixedFields (prefix, i);
 				if (count > 1) {
 					string msg = String.Format (CultureInfo.InvariantCulture,
-						"This type contains fields common prefixes: {0} fields prefixed with '{1}'.",
+						"This type contains fields with common prefixes: {0} fields prefixed with '{1}'.",
 						count, prefix);
 					Runner.Report (type, Severity.Medium, Confidence.High, msg);
 				}

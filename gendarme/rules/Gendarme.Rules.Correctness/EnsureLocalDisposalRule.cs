@@ -85,7 +85,7 @@ namespace Gendarme.Rules.Correctness {
 	/// 	var stream = new StreamReader (file);
 	/// 	Decode (stream);
 	/// }
-	/// 
+	///
 	/// void Decode (Stream stream)
 	/// {
 	/// 	/*code to decode the stream*/
@@ -102,7 +102,7 @@ namespace Gendarme.Rules.Correctness {
 	/// 		Decode (stream);
 	/// 	}
 	/// }
-	/// 
+	///
 	/// void Decode (Stream stream)
 	/// {
 	/// 	/*code to decode the stream*/
@@ -335,7 +335,7 @@ namespace Gendarme.Rules.Correctness {
 			TypeReference type = ins.Is (Code.Newobj) ? call.DeclaringType : call.ReturnType;
 			bool fluent = IsFluentLike (call);
 			string msg = String.Format (CultureInfo.InvariantCulture, "Local of type '{0}' is not disposed of ({1}).",
-				type.Name, fluent ? "is this a fluent-like API ?" : "at least not locally");
+				type.Name, fluent ? "is this a fluent-like API?" : "at least not locally");
 			Runner.Report (method, ins, Severity.High, fluent ? Confidence.Normal : Confidence.High, msg);
 		}
 

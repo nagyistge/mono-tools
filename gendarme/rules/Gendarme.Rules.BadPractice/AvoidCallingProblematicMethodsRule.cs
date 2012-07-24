@@ -56,11 +56,11 @@ namespace Gendarme.Rules.BadPractice {
 	/// <description><c>System.Runtime.InteropServices.SafeHandle::DangerousGetHandle()</c></description>
 	/// </item>
 	/// <item>
-	/// <description><c>System.Reflection.Assembly::LoadFrom()</c>, <c>LoadFile()</c> and 
+	/// <description><c>System.Reflection.Assembly::LoadFrom()</c>, <c>LoadFile()</c> and
 	/// <c>LoadWithPartialName()</c></description>
 	/// </item>
 	/// <item>
-	/// <description><c>System.Type::InvokeMember()</c> when used with 
+	/// <description><c>System.Type::InvokeMember()</c> when used with
 	/// <c>BindingFlags.NonPublic</c></description>
 	/// </item>
 	/// </list>
@@ -89,32 +89,32 @@ namespace Gendarme.Rules.BadPractice {
 	/// </example>
 	/// <remarks>This rule is available since Gendarme 2.0</remarks>
 
-	[Problem ("There are potentially dangerous calls into your code.")]
+	[Problem ("There are potentially dangerous calls in your code.")]
 	[Solution ("You should remove or replace the call to the dangerous method.")]
 	[EngineDependency (typeof (OpCodeEngine))]
 	[FxCopCompatibility ("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods")]
 	public class AvoidCallingProblematicMethodsRule : Rule, IMethodRule {
 
-		SortedDictionary<string, Func<MethodReference, Instruction, Severity?>> problematicMethods = 
-			new SortedDictionary<string, Func<MethodReference, Instruction, Severity?>> (); 
+		SortedDictionary<string, Func<MethodReference, Instruction, Severity?>> problematicMethods =
+			new SortedDictionary<string, Func<MethodReference, Instruction, Severity?>> ();
 
 		public AvoidCallingProblematicMethodsRule ()
 		{
-			problematicMethods.Add ("Collect", (m, i) => 
+			problematicMethods.Add ("Collect", (m, i) =>
 				m.DeclaringType.IsNamed ("System", "GC") ? Severity.Critical : (Severity?) null);
-			problematicMethods.Add ("Suspend", (m, i) => 
+			problematicMethods.Add ("Suspend", (m, i) =>
 				m.DeclaringType.IsNamed ("System.Threading", "Thread") ? Severity.Medium : (Severity?) null);
-			problematicMethods.Add ("Resume", (m, i) => 
+			problematicMethods.Add ("Resume", (m, i) =>
 				m.DeclaringType.IsNamed ("System.Threading", "Thread") ? Severity.Medium : (Severity?) null);
-			problematicMethods.Add ("DangerousGetHandle", (m, i) => 
+			problematicMethods.Add ("DangerousGetHandle", (m, i) =>
 				m.DeclaringType.IsNamed ("System.Runtime.InteropServices", "SafeHandle") ? Severity.Critical : (Severity?) null);
-			problematicMethods.Add ("LoadFrom", (m, i) => 
+			problematicMethods.Add ("LoadFrom", (m, i) =>
 				m.DeclaringType.IsNamed ("System.Reflection", "Assembly") ? Severity.High : (Severity?) null);
-			problematicMethods.Add ("LoadFile", (m, i) => 
+			problematicMethods.Add ("LoadFile", (m, i) =>
 				m.DeclaringType.IsNamed ("System.Reflection", "Assembly") ? Severity.High : (Severity?) null);
-			problematicMethods.Add ("LoadWithPartialName", (m, i) => 
+			problematicMethods.Add ("LoadWithPartialName", (m, i) =>
 				m.DeclaringType.IsNamed ("System.Reflection", "Assembly") ? Severity.High : (Severity?) null);
-			problematicMethods.Add ("InvokeMember", (m, i) => 
+			problematicMethods.Add ("InvokeMember", (m, i) =>
 				!m.DeclaringType.IsNamed ("System", "Type") ? (Severity?) null :
 					IsAccessingWithNonPublicModifiers (i) ? Severity.Critical : (Severity?) null);
 		}
@@ -150,7 +150,7 @@ namespace Gendarme.Rules.BadPractice {
 			}
 			return null;
 		}
-		
+
 		public RuleResult CheckMethod (MethodDefinition method)
 		{
 			// rule does not apply if there's no IL code
@@ -168,11 +168,11 @@ namespace Gendarme.Rules.BadPractice {
 				Severity? severity = IsProblematicCall (instruction);
 				if (severity.HasValue) {
 					string msg = String.Format (CultureInfo.InvariantCulture,
-						"You are calling to {0}, which is a potentially problematic method", 
+						"You are calling to {0}, which is a potentially problematic method",
 						MethodPrinter.FormatMethod((MethodReference)instruction.Operand));
 					Runner.Report (method, instruction, severity.Value, Confidence.High, msg);
 				}
-			}	
+			}
 
 			return Runner.CurrentRuleResult;
 		}

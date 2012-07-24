@@ -1,4 +1,4 @@
-// 
+//
 // Gendarme.Rules.BadPractice.AvoidVisibleConstantFieldRule
 //
 // Authors:
@@ -61,7 +61,7 @@ namespace Gendarme.Rules.BadPractice {
 	/// </example>
 	/// <remarks>This rule is available since Gendarme 2.0</remarks>
 
-	[Problem ("This type contains visible constant fields so the value instead of the field will be embedded into assemblies which use it.")]
+	[Problem ("This type contains visible constants; their value will be embedded into assemblies that use them, instead of a reference.")]
 	[Solution ("Use a 'static readonly' field (C# syntax) so that the field's value can be changed without forcing client assemblies to be recompiled.")]
 	public class AvoidVisibleConstantFieldRule : Rule, ITypeRule {
 
@@ -86,7 +86,7 @@ namespace Gendarme.Rules.BadPractice {
 				if (!ftype.IsValueType && !ftype.IsNamed ("System", "String"))
 					continue;
 
-				string msg = string.Format (CultureInfo.InvariantCulture, "'{0}' of type {1}.", 
+				string msg = string.Format (CultureInfo.InvariantCulture, "'{0}' of type {1}.",
 					field.Name, ftype.GetFullName ());
 				Runner.Report (field, Severity.High, Confidence.High, msg);
 

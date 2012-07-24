@@ -50,7 +50,7 @@ namespace Gendarme.Rules.Performance {
 	/// public class Bad {
 	///	int i;
 	///	string s;
-	///	
+	///
 	///	public Bad ()
 	///	{
 	///		i = 0;
@@ -65,7 +65,7 @@ namespace Gendarme.Rules.Performance {
 	/// public class Good {
 	///	int i;
 	///	string s;
-	///	
+	///
 	///	public Good ()
 	///	{
 	///		// don't assign 'i' since it's already 0
@@ -77,7 +77,7 @@ namespace Gendarme.Rules.Performance {
 	/// </example>
 	/// <remarks>This rule is available since Gendarme 2.2</remarks>
 
-	[Problem ("This constructor needlessly initializes zero initializes some fields.")]
+	[Problem ("This constructor needlessly zero-initializes some fields.")]
 	[Solution ("Remove the unneeded initialization from the constructors.")]
 	[EngineDependency (typeof (OpCodeEngine))]
 	[FxCopCompatibility ("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily")]
