@@ -101,6 +101,9 @@ namespace Gendarme.Rules.Exceptions {
 					return false;
 			}
 
+            if (operand.Contains("."))
+                operand = operand.Substring(0, operand.IndexOf("."));
+
 			// note: we already know there are Parameters for this method is we got here
 			foreach (ParameterDefinition parameter in method.Parameters) {
 				if (parameter.Name == operand)

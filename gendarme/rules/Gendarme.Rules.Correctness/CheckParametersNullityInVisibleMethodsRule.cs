@@ -168,7 +168,7 @@ namespace Gendarme.Rules.Correctness {
 				// compare with null (next or previous to current instruction)
 				// followed by a CEQ instruction
 				if (nc == Code.Ldnull) {
-					if (next.Next.OpCode.Code == Code.Ceq)
+                    if (next.Next.OpCode.Code == Code.Ceq || next.Next.OpCode.Code == Code.Cgt_Un)
 						has_null_check.Set (parameter.Index);
 				} else if (nc == Code.Ceq) {
 					if (ins.Previous.OpCode.Code == Code.Ldnull)
