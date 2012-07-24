@@ -143,7 +143,8 @@ namespace Gendarme {
 		private void AddList (IMetadataTokenProvider metadata, IEnumerable<string> rules)
 		{
 			foreach (string rule in rules) {
-				base.Add (rule, metadata);
+                if (rule != null)
+				    base.Add (rule, metadata);
 			}
 		}
 
