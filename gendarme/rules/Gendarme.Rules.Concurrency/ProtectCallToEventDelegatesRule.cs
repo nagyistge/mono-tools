@@ -101,7 +101,7 @@ namespace Gendarme.Rules.Concurrency {
 			switch (ins.OpCode.Code) {
 			// csc does a ldloc.x + ldnull + ceq for: if (variable == null)
 			case Code.Ldnull:
-				return (ins.Next.OpCode.Code == Code.Ceq);
+				return (ins.Next.OpCode.Code == Code.Ceq || ins.Next.OpCode.Code == Code.Cgt_Un);
 			// [g]mcs will do a Br[true|false][.s]
 			case Code.Brfalse:
 			case Code.Brfalse_S:

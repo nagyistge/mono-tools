@@ -84,7 +84,7 @@ namespace Gendarme.Rules.Smells {
 				Pattern duplicated = GetDuplicatedCode (current, target);
 				if (duplicated != null && duplicated.Count > 0) {
 					parent_rule.Runner.Report (current, duplicated[0], Severity.High, Confidence.Normal, 
-						String.Format (CultureInfo.InvariantCulture, "Duplicated code with {0}", target.GetFullName ()));
+						String.Format (CultureInfo.InvariantCulture, "Duplicated code with {0}", MethodPrinter.FormatMethod(target)));
 				}
 			}
 		}

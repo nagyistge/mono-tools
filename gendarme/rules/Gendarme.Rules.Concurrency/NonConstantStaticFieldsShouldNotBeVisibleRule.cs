@@ -81,7 +81,7 @@ namespace Gendarme.Rules.Concurrency {
 
 			foreach (FieldDefinition field in type.Fields) {
 				if (field.IsStatic && field.IsVisible () && !field.IsInitOnly && !field.IsLiteral) {
-					Runner.Report (field, Severity.Medium, Confidence.High);
+					Runner.Report (field, Severity.Medium, Confidence.High, String.Format("Change the field \"{0}\" to read-only, or mark it [ThreadStatic], or make it non visible outside the assembly.", field.Name));
 				}
 			}
 

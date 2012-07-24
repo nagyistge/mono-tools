@@ -143,7 +143,7 @@ namespace Gendarme.Rules.Design.Generic {
 				}
 				if (!found) {
 					string msg = String.Format (CultureInfo.InvariantCulture,
-						"Generic parameter '{0}.{1}' is not used by the method parameters.", nspace, name);
+						"Generic parameter '{0}' is not used by the method parameters.", name);
 					Runner.Report (method, severity, Confidence.High, msg);
 				}
 			}

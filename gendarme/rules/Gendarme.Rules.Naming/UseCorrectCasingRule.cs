@@ -103,6 +103,9 @@ namespace Gendarme.Rules.Naming {
 		// check if name is camelCased
 		private static bool IsCamelCase (string name)
 		{
+            if (name.StartsWith("an") & name.Length > 2 && Char.IsUpper(name[2])) name = name.Substring(2);
+            else if (name.StartsWith("a") & name.Length > 2 && Char.IsUpper(name[1])) name = name.Substring(1);
+
 			if (String.IsNullOrEmpty (name))
 				return true;
 
@@ -236,7 +239,8 @@ namespace Gendarme.Rules.Naming {
 			if (method.HasParameters) {
 				foreach (ParameterDefinition param in method.Parameters) {
 					// params should all be camelCased
-					if (!IsCamelCase (param.Name)) {
+                    var s = param.Name;
+					if (!IsCamelCase (s)) {
 						string errorMessage = String.Format (CultureInfo.InvariantCulture,
 							"By existing naming conventions, the parameter names should all be camel-cased (e.g. myParameter). Rename '{0}' parameter to '{1}'.",
 							param, CamelCase (param.Name));
