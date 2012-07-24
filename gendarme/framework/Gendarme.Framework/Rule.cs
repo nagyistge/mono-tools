@@ -39,7 +39,7 @@ namespace Gendarme.Framework {
 		private bool active = true;
 		private string name;
 		private string full_name;
-		private string problem;
+        private string problem, help;
 		private string solution;
 		private Uri uri;
 		private Type type;
@@ -115,6 +115,23 @@ namespace Gendarme.Framework {
 				return problem;
 			}
 		}
+
+        public virtual string Help
+        {
+            get
+            {
+                if (problem == null)
+                {
+                    object obj = GetCustomAttribute(typeof(ProblemAttribute));
+                    if (obj == null)
+                        help = "Missing [Problem] attribute on rule.";
+                    else
+                        help = (obj as ProblemAttribute).Help;
+                }
+                return help;
+            }
+        }
+
 
 		public virtual string Solution { 
 			get {

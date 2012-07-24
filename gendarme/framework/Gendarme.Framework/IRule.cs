@@ -67,6 +67,11 @@ namespace Gendarme.Framework {
 		/// </summary>
 		string Problem { get; }
 
+        /// <summary>
+        /// A follow up on the problem that's not generally needed when also looking at the solution
+        /// </summary>
+        string Help { get; }
+
 		/// <summary>
 		/// Short abstract of the solution to this problem. For a complete solution
 		/// with examples (both good and bad) end-users should read the documentation URI.

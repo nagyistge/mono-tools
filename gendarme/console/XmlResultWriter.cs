@@ -163,6 +163,8 @@ namespace Gendarme {
 			writer.WriteAttributeString ("Name", rule.Name);
 			writer.WriteAttributeString ("Uri", rule.Uri.ToString ());
 			writer.WriteElementString ("problem", rule.Problem);
+            if (rule.Help != null)
+                writer.WriteElementString("help", rule.Help);
 			writer.WriteElementString ("solution", rule.Solution);
 		}
 

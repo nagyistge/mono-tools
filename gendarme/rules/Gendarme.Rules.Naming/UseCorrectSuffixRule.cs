@@ -77,7 +77,7 @@ namespace Gendarme.Rules.Naming {
 	/// </code>
 	/// </example>
 
-	[Problem ("This type does not end with the correct suffix. That usually happens when you define a custom attribute or exception and forget to append suffixes like 'Attribute' or 'Exception' to the type name.")]
+	[Problem ("This type does not end with the correct suffix.", Help =  "That usually happens when you define a custom attribute or exception and forget to append suffixes like 'Attribute' or 'Exception' to the type name.")]
 	[Solution ("Rename the type and append the correct suffix.")]
 	[FxCopCompatibility ("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
 	[FxCopCompatibility ("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]

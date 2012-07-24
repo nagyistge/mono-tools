@@ -186,6 +186,7 @@ function expcol (sender, args)
 							<b>Problem:</b>
 							<p class="problem">
 								<xsl:value-of select="problem" />
+                <xsl:value-of select="help" />
 							</p>
 
 							<b>Solution:</b>

@@ -37,6 +37,8 @@ namespace Gendarme.Framework {
 			Problem = problem;
 		}
 
+        public string Help { get; set; }
+
 		public string Problem {
 			get;
 			private set;

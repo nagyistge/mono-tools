@@ -123,6 +123,14 @@ namespace Gendarme {
 			EndColor ();
 			writer.Write (rule.Problem);
 			writer.WriteLine ();
+            if (rule.Help != null)
+            {
+                BeginColor (ConsoleColor.DarkRed);
+                writer.Write ("Help: ");
+                EndColor();
+                writer.Write (rule.Help);
+                writer.WriteLine ();
+            }
 
 			writer.WriteLine ("* Severity: {0}, Confidence: {1}", defect.Severity, defect.Confidence);
 			writer.WriteLine ("* Target:   {0}", defect.Target);
