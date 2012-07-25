@@ -103,8 +103,15 @@ namespace Gendarme.Rules.Naming {
 		// check if name is camelCased
 		private static bool IsCamelCase (string name)
 		{
-            if (name.StartsWith("an") & name.Length > 2 && Char.IsUpper(name[2])) name = name.Substring(2);
-            else if (name.StartsWith("a") & name.Length > 2 && Char.IsUpper(name[1])) name = name.Substring(1);
+            if (name.StartsWith("an") & name.Length > 2 && Char.IsUpper(name[2]))
+            {
+                return Char.IsUpper(name[2]);
+            }
+            else if (name.StartsWith("a") & name.Length > 2 && Char.IsUpper(name[1]))
+            {
+                return Char.IsUpper(name[1]);
+            }
+
 
 			if (String.IsNullOrEmpty (name))
 				return true;
