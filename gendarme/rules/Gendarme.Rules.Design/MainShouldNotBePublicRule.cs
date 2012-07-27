@@ -95,6 +95,8 @@ namespace Gendarme.Rules.Design {
 			// at last, if Main () is not public, then it's okay
 			if (!entry_point.IsPublic)
 				return RuleResult.Success;
+            if (entry_point.HasAttribute("System.CodeDom.Compiler", "GeneratedCodeAttribute") || entry_point.HasAttribute("System.Runtime.CompilerServices", "CompilerGeneratedAttribute"))
+                return RuleResult.Success;
 
 			if (assembly.References (VisualBasic)) {
 				Runner.Report (type, Severity.Medium, Confidence.High, "Reduce class or module visibility (from public).");
