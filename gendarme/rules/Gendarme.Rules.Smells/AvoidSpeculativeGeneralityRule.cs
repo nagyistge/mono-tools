@@ -136,7 +136,10 @@ namespace Gendarme.Rules.Smells {
 
 		private void CheckAbstractClassWithoutResponsability (TypeDefinition type)
 		{
-			if (type.IsAbstract) {
+			if (type.IsAbstract && 
+                (type.IsNested ? (type.IsNestedAssembly || type.IsNestedFamilyAndAssembly || type.IsNestedPrivate) 
+                : (type.IsNotPublic)
+                )) {
 				if (HasExpectedInheritedTypeCount (type, 1))
 					Runner.Report (type, Severity.Medium, Confidence.Normal, "This abstract class has only one class inheritting from.  Abstract classes without responsability are a sign for the Speculative Generality smell.");
 			}
