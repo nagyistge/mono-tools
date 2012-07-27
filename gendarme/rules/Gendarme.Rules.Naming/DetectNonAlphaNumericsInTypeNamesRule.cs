@@ -115,12 +115,12 @@ namespace Gendarme.Rules.Naming {
 		public RuleResult CheckAssembly (AssemblyDefinition assembly)
 		{
 			if (!CheckName (assembly.Name.Name, false))
-				Runner.Report (assembly, Severity.Medium, Confidence.High);
+				Runner.Report (assembly, Severity.Medium, Confidence.High, String.Format("Remove the underscore from the specified name: {0}", assembly.Name.Name));
 
 			// check every namespaces inside the assembly using the NamespaceEngine
 			foreach (string ns in NamespaceEngine.NamespacesInside (assembly)) {
 				if (!CheckName (ns, false))
-					Runner.Report (NamespaceDefinition.GetDefinition (ns), Severity.Medium, Confidence.High);
+					Runner.Report (NamespaceDefinition.GetDefinition (ns), Severity.Medium, Confidence.High, String.Format("Remove the underscore from the specified name: {0}", ns));
 			}
 			return Runner.CurrentRuleResult;
 		}
@@ -137,7 +137,7 @@ namespace Gendarme.Rules.Naming {
 
 			// check the type name
 			if (!CheckName (type.Name, false)) {
-				Runner.Report (type, Severity.Medium, Confidence.High);
+                Runner.Report(type, Severity.Medium, Confidence.High, String.Format("Remove the underscore from the specified name: {0}", type.Name));
 			}
 
 			// CheckMethod covers methods, properties and events (indirectly)
@@ -153,7 +153,7 @@ namespace Gendarme.Rules.Naming {
 						continue;
 
 					if (!CheckName (field.Name, false)) {
-						Runner.Report (field, Severity.Medium, Confidence.High);
+						Runner.Report (field, Severity.Medium, Confidence.High,  String.Format("Remove the underscore from the specified name: {0}", field.Name));
 					}
 				}
 			}
@@ -173,12 +173,12 @@ namespace Gendarme.Rules.Naming {
 
 			// check the method name
 			if (!CheckName (method.Name, method.IsSpecialName))
-				Runner.Report (method, Severity.Medium, Confidence.High);
+                Runner.Report (method, Severity.Medium, Confidence.High, String.Format("Remove the underscore from the specified name: {0}", method.Name));
 
 			if (method.HasParameters) {
 				foreach (ParameterDefinition parameter in method.Parameters) {
 					if (!CheckName (parameter.Name, false))
-						Runner.Report (parameter, Severity.Medium, Confidence.High);
+                        Runner.Report (parameter, Severity.Medium, Confidence.High, String.Format("Remove the underscore from the specified name: {0}", parameter.Name));
 				}
 			}
 
