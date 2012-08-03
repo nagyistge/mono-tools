@@ -110,7 +110,8 @@ namespace Gendarme.Rules.BadPractice {
 
 				bool exceptionUsed = false;
 				foreach (var usage in usageResults) {
-					switch (usage.Instruction.OpCode.Code) {
+                    switch (usage.Instruction.OpCode.Code) {
+                    case Code.Dup:
 					case Code.Throw: //throw
 					case Code.Ret: //return
 					case Code.Stind_I: //out / ref
