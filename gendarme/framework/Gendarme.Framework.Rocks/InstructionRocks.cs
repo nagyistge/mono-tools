@@ -537,8 +537,18 @@ namespace Gendarme.Framework.Rocks {
 			while (n > 0 && self.Previous != null) {
 				self = self.Previous;
 				// we cannot "simply" trace backward over a unconditional branch
-				if (self.OpCode.FlowControl == FlowControl.Branch)
-					return null;
+                if (self.OpCode.FlowControl == FlowControl.Branch)
+                {
+                    self = self.Previous;
+                    if (self != null && self.OpCode.Code == Code.Pop && self.Previous != null &
+                        self.Previous.OpCode.FlowControl == FlowControl.Cond_Branch)
+                    {
+                        self = self.Previous.Previous;
+                        if (self != null && self.Previous != null && self.OpCode == OpCodes.Dup)
+                            return self.Previous;
+                    }
+                    return null;
+                }
 				n -= self.GetPushCount ();
 				if (n == 0)
 					return self;
