@@ -315,9 +315,27 @@ namespace Gendarme.Rules.Correctness {
 				string msg = String.Format (CultureInfo.InvariantCulture,
 					"Local {0}is not disposed of (at least not locally).",
 					GetFriendlyNameOrEmpty (method.Body.Variables [(int) i]));
+                if (IgnoreType(method.Body.Variables[(int)i].VariableType)) continue; // Task and friends do not get to be disposed; they don't have to be
 				Runner.Report (method, Severity.High, Confidence.Normal, msg);
 			}
 		}
+
+        private bool IgnoreType(TypeReference typeReference)
+        {
+            if (typeReference == null) return false;
+            if (typeReference.IsOptionalModifier)
+                return IgnoreType(typeReference.GetElementType());
+            switch (typeReference.FullName)
+            {
+                case "System.Threading.Tasks.Task":
+                case "System.Threading.Tasks.Task`1":
+                    return true;
+                default:
+                    return false;
+            }
+
+
+        }
 
 		static bool IsFluentLike (MethodReference method)
 		{

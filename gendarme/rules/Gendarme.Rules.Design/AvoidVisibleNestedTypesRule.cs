@@ -90,6 +90,10 @@ namespace Gendarme.Rules.Design {
 			if (!type.IsVisible ())
 				return RuleResult.Success;
 
+            if (type.DeclaringType != null &&
+                type.DeclaringType.FullName == "<PublicImplementationDetails>")
+                return RuleResult.DoesNotApply;
+
 			// otherwise we warn about the nested type
 			Runner.Report (type, Severity.Medium, Confidence.Total);
 			return RuleResult.Failure;
